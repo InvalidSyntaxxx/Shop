@@ -16,7 +16,7 @@ app = Flask(__name__)
 
 
 # 设置连接数据库的URL(账号:密码@端口/数据库)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:WANGchen0809.@127.0.0.1:3306/数据库课设'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:你的数据库密码@127.0.0.1:3306/数据库课设'
 
 # 设置json格式
 app.config['JSON_AS_ASCII'] = False
