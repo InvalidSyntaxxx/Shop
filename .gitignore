@@ -3,6 +3,8 @@
 *.docx
 *.doc
 
+.vscode/
+node_modules/
 
 
 
