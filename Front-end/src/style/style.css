@@ -1,0 +1,16 @@
+:root {
+  --pc-padding-size: 5rem;
+  --mb-padding-size: 2rem;
+  --small-padding-size: 1rem;
+  --nav-height-size: 4rem;
+  --text-font-family: "LXGW WenKai Lite", sans-serif;
+  --toggle-transition: 0.3s ease;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+#app {
+  background-color: #f5f5f5;
+}
