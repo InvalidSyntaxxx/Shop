@@ -10,6 +10,7 @@ import os,sys,random,string
 from werkzeug.security import check_password_hash
 # 工程文件路径
 rootpath = "C:/Users/86199/Desktop/数据库学习笔记/数据库课设/Front-end"
+# rootpath = "/home/wyz/Shop/Front-end"
 
 
 app = Flask(__name__)
