@@ -4,9 +4,11 @@ Shop是一款由前端渐进式技术框架 Vue3.2 和后端技术框架 Flask�
 
 ## 传送门
 
-👉[前端源码](./Back-end/)👈(页面展示)
+👉[前端源码](./Front-end/)👈(页面展示)
 
-👉[后端源码](./Front-end/)👈
+👉[后端源码](./Back-end/)👈
+
+👉[商城1.0版本](https://shop.wangwangyz.site)👈
 
 ## 感谢
 
