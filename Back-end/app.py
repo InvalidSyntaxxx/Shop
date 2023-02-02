@@ -5,7 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import and_, or_
 from flask_cors import CORS
 from flask_cors import cross_origin
-import os,sys,random,string
+
 
 from werkzeug.security import check_password_hash
 # 工程文件路径
