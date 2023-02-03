@@ -4,7 +4,7 @@
  * @Author: 王远昭
  * @Date: 2023-01-14 21:58:06
  * @LastEditors: 王远昭
- * @LastEditTime: 2023-01-17 09:01:57
+ * @LastEditTime: 2023-02-03 11:10:36
 -->
 <template>
     <!-- 商品展示 -->
@@ -12,7 +12,7 @@
         <h2 class="classification">手机</h2>
         <div class="productcontainer">
             <div class="left">
-                <img style="max-height: 768px;" src="images/products/side.jpg" alt="">
+                <img style="max-height: 768px;" src="/products/side.jpg" alt="">
             </div>
             <div class="right">
                 <div v-for="product in phone" class="product">
@@ -20,7 +20,7 @@
                         <ion-icon name="cart-outline"></ion-icon>
                     </div>
                     <div class="imgcontainer">
-                        <img :src="'../images/products/' + product['img']" alt="">
+                        <img :src="'/products/' + product['img']" alt="">
                     </div>
                     <div class="info">
                         <span class="see"><ion-icon style="font-size: large;" name="eye-outline"></ion-icon>{{
@@ -54,7 +54,7 @@
             <div v-for="other in others" class="product">
                 <div class="add" @click="handleCart(other.id)"><ion-icon name="cart-outline"></ion-icon></div>
                 <div class="imgcontainer">
-                    <img :src="'../images/products/' + other['img']" alt="">
+                    <img :src="'/products/' + other['img']" alt="">
                 </div>
                 <div class="info">
                     <span class="see"><ion-icon style="font-size: large;" name="eye-outline"></ion-icon>{{
@@ -73,8 +73,13 @@
 </template>
 <script>
 import axios from 'axios'
+import { useGlobalStore } from '../store/global';
 import { ElMessage, ElMessageBox } from 'element-plus';
 export default {
+    setup(){
+        const Globalstore = useGlobalStore()
+        return { Globalstore } 
+    },
     data() {
         return {
             typeSelect: false,
@@ -97,7 +102,7 @@ export default {
                 console.log(sessionStorage.getItem("username"))
                 let params = new FormData()
                 params.append('id', productID)
-                axios.post("http://localhost:53000/cart", params,
+                axios.post( this.Globalstore.getApiSever+"/cart", params,
                     {
                         headers: { 'Content-Type': 'multipart/form-data' },
                     })
@@ -133,7 +138,7 @@ export default {
         },
         getProduct(limit) {
             axios
-                .get("http://localhost:53000/products?_limit=" + limit)
+                .get(this.Globalstore.apiSever+"/products?_limit=" + limit)
                 .then((res) => {
                     this.products = res.data;
                     this.phone = this.products.slice(0, 8)
@@ -141,13 +146,13 @@ export default {
                 });
         },
         getType() {
-            axios.get("http://localhost:53000/fenlei").then((res) => {
+            axios.get(this.Globalstore.apiSever+"/fenlei").then((res) => {
                 this.type = res.data;
             });
         },
         getOther() {
             axios
-                .get("http://localhost:53000/products")
+                .get(this.Globalstore.apiSever+"/products")
                 .then((res) => {
                     this.others = res.data;
                     this.others.reverse()

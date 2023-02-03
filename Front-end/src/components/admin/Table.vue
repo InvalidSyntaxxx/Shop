@@ -4,10 +4,9 @@
  * @Author: 王远昭
  * @Date: 2023-01-14 23:39:40
  * @LastEditors: 王远昭
- * @LastEditTime: 2023-01-16 18:31:59
+ * @LastEditTime: 2023-02-03 11:12:32
 -->
 <template>
-
     <!-- 表单 -->
     <div class="maintable">
         <div class="maincontainer">
@@ -62,6 +61,7 @@
 import axios from 'axios';
 import { computed } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
+import { useGlobalStore } from '../../store/global'
 import ProductForm from './ProductForm.vue'
 export default {
     components: { ProductForm },
@@ -72,9 +72,13 @@ export default {
             action: computed(() => this.action)
         }
     },
+    setup() {
+        const Globalstore = useGlobalStore()
+        return { Globalstore }
+    },
     data() {
         return {
-            rootImage: "images/products/",
+            rootImage: "/products/",
             originImage: [],
             form: {},
             action: "",
@@ -103,13 +107,13 @@ export default {
             });
         },
         getType() {
-            axios.get("http://localhost:53000/fenlei").then((res) => {
+            axios.get(this.Globalstore.apiSever + "/fenlei").then((res) => {
                 this.type = res.data;
             });
         },
         getProduct() {
             axios
-                .get("http://localhost:53000/products")
+                .get(this.Globalstore.apiSever + "/products")
                 .then((res) => {
                     this.container.products = res.data;
                     //   alert(JSON.stringify(this.container.products))
@@ -162,7 +166,7 @@ export default {
                     // 后端数据删除
                     axios({
                         url:
-                            "http://localhost:53000/products?DeleteID=" +
+                            this.Globalstore.apiSever + "/products?DeleteID=" +
                             this.container.tableData[index]["id"],
                         method: "POST",
                     })
@@ -233,7 +237,7 @@ export default {
 }
 </script>
 <style scoped>
-.tableTop{
-    margin: 20px 0 10px 20px ;
+.tableTop {
+    margin: 20px 0 10px 20px;
 }
 </style>

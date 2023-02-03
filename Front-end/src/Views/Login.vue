@@ -61,12 +61,15 @@
 
 <script>
 import axios from 'axios';
-import { userStore } from '../store/store'
+import { useUserStore } from '../store/user'
+import { useGlobalStore } from '../store/global';
 import { ElMessage } from 'element-plus';
 export default {
     setup() {
-        const store = userStore();
+        const store = useUserStore();
+        const Globalstore = useGlobalStore();
         return {
+            Globalstore,
             store //响应式数据
         }
     },
@@ -101,7 +104,7 @@ export default {
         },
         handleLogin() {
             axios.post(
-                'http://localhost:53000/login',
+                this.Globalstore.apiSever + '/login',
                 {
                     nikename: this.user.username,
                     password: this.user.password
@@ -130,7 +133,7 @@ export default {
         handleRegister() {
             // this.showTips(this.user.username)
             axios.post(
-                'http://localhost:53000/user',
+                this.Globalstore.apiSever + '/user',
                 {
                     nikename: this.user.username,
                     password: this.user.password,

@@ -4,7 +4,7 @@
  * @Author: 王远昭
  * @Date: 2023-01-15 17:26:39
  * @LastEditors: 王远昭
- * @LastEditTime: 2023-01-17 08:44:22
+ * @LastEditTime: 2023-02-02 11:48:54
 -->
 <template>
     <el-form ref="ruleFormRef"  :model="form" :rules="rules" class="demo-ruleForm" label-width="120px" status-icon>
@@ -49,6 +49,7 @@
 </template>
 <script>
 import axios from 'axios';
+import { useGlobalStore } from '../../store/global';
 import { ElMessage } from 'element-plus';
 import { ref } from 'vue';
 // 前端表单验证规则
@@ -107,8 +108,9 @@ const rules = {
 export default {
     inject: ['form', 'originImage', 'action'],
     setup() {
-        const uploadFile = ref();
-    },
+    const Globalstore = useGlobalStore()
+    return { Globalstore }
+},
     data() {
         return {
             rootImage: "images/products/",
@@ -126,7 +128,7 @@ export default {
             });
         },
         getType() {
-            axios.get("http://localhost:53000/fenlei").then((res) => {
+            axios.get(this.Globalstore.apiSever + "/fenlei").then((res) => {
                 this.type = res.data;
             });
         },
@@ -137,7 +139,7 @@ export default {
             const fd = new FormData()
             fd.append('img',e.file)
             // 将文件转化为base64格式传入后端
-                axios.post("http://127.0.0.1:53000/upload",fd)
+                axios.post(this.Globalstore.apiSever + "/upload",fd)
                     .then((res) => {
                         console.log("succss uplaod")
                     })
@@ -150,7 +152,7 @@ export default {
                     console.log(this.form)
                     axios({
                         method: "put",
-                        url: "http://localhost:53000/products",
+                        url: this.Globalstore.apiSever + "/products",
                         data: this.form,
                         headers: {
                             'Content-Type': 'multipart/form-data',
@@ -178,7 +180,7 @@ export default {
                 if (valid) {
                     axios({
                         method: "post",
-                        url: "http://localhost:53000/products",
+                        url: this.Globalstore.apiSever + "/products",
                         data: this.form,
                         headers: {
                             'Content-Type': 'multipart/form-data',
