@@ -4,7 +4,7 @@
  * @Author: 王远昭
  * @Date: 2023-01-15 17:26:39
  * @LastEditors: 王远昭
- * @LastEditTime: 2023-02-02 11:48:54
+ * @LastEditTime: 2023-02-03 17:45:18
 -->
 <template>
     <el-form ref="ruleFormRef"  :model="form" :rules="rules" class="demo-ruleForm" label-width="120px" status-icon>
@@ -128,7 +128,7 @@ export default {
             });
         },
         getType() {
-            axios.get(this.Globalstore.apiSever + "/fenlei").then((res) => {
+            axios.get(this.Globalstore.apiServer + "/fenlei").then((res) => {
                 this.type = res.data;
             });
         },
@@ -139,7 +139,7 @@ export default {
             const fd = new FormData()
             fd.append('img',e.file)
             // 将文件转化为base64格式传入后端
-                axios.post(this.Globalstore.apiSever + "/upload",fd)
+                axios.post(this.Globalstore.apiServer + "/upload",fd)
                     .then((res) => {
                         console.log("succss uplaod")
                     })
@@ -152,7 +152,7 @@ export default {
                     console.log(this.form)
                     axios({
                         method: "put",
-                        url: this.Globalstore.apiSever + "/products",
+                        url: this.Globalstore.apiServer + "/products",
                         data: this.form,
                         headers: {
                             'Content-Type': 'multipart/form-data',
@@ -180,7 +180,7 @@ export default {
                 if (valid) {
                     axios({
                         method: "post",
-                        url: this.Globalstore.apiSever + "/products",
+                        url: this.Globalstore.apiServer + "/products",
                         data: this.form,
                         headers: {
                             'Content-Type': 'multipart/form-data',

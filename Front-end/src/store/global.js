@@ -4,7 +4,7 @@
  * @Author: 王远昭
  * @Date: 2023-01-17 10:01:45
  * @LastEditors: 王远昭
- * @LastEditTime: 2023-02-03 00:27:51
+ * @LastEditTime: 2023-02-03 17:44:21
  */
 import { defineStore,acceptHMRUpdate } from "pinia";
 export const useGlobalStore = defineStore({
@@ -14,7 +14,7 @@ export const useGlobalStore = defineStore({
         apiPort: '53000',
     }),
     getters:{
-        apiSever:(state) => state.apiHost + ":" + state.apiPort
+        apiServer:(state) => state.apiHost + ":" + state.apiPort
     },
     actions: {
         getImageUrl(name) {

@@ -4,7 +4,7 @@
  * @Author: 王远昭
  * @Date: 2023-01-14 23:39:40
  * @LastEditors: 王远昭
- * @LastEditTime: 2023-02-03 11:12:32
+ * @LastEditTime: 2023-02-03 17:45:11
 -->
 <template>
     <!-- 表单 -->
@@ -107,13 +107,13 @@ export default {
             });
         },
         getType() {
-            axios.get(this.Globalstore.apiSever + "/fenlei").then((res) => {
+            axios.get(this.Globalstore.apiServer + "/fenlei").then((res) => {
                 this.type = res.data;
             });
         },
         getProduct() {
             axios
-                .get(this.Globalstore.apiSever + "/products")
+                .get(this.Globalstore.apiServer + "/products")
                 .then((res) => {
                     this.container.products = res.data;
                     //   alert(JSON.stringify(this.container.products))
@@ -166,7 +166,7 @@ export default {
                     // 后端数据删除
                     axios({
                         url:
-                            this.Globalstore.apiSever + "/products?DeleteID=" +
+                            this.Globalstore.apiServer + "/products?DeleteID=" +
                             this.container.tableData[index]["id"],
                         method: "POST",
                     })

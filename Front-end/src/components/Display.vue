@@ -4,7 +4,7 @@
  * @Author: 王远昭
  * @Date: 2023-01-14 21:58:06
  * @LastEditors: 王远昭
- * @LastEditTime: 2023-02-03 11:10:36
+ * @LastEditTime: 2023-02-03 17:45:14
 -->
 <template>
     <!-- 商品展示 -->
@@ -102,7 +102,7 @@ export default {
                 console.log(sessionStorage.getItem("username"))
                 let params = new FormData()
                 params.append('id', productID)
-                axios.post( this.Globalstore.getApiSever+"/cart", params,
+                axios.post( this.Globalstore.getapiServer+"/cart", params,
                     {
                         headers: { 'Content-Type': 'multipart/form-data' },
                     })
@@ -138,7 +138,7 @@ export default {
         },
         getProduct(limit) {
             axios
-                .get(this.Globalstore.apiSever+"/products?_limit=" + limit)
+                .get(this.Globalstore.apiServer+"/products?_limit=" + limit)
                 .then((res) => {
                     this.products = res.data;
                     this.phone = this.products.slice(0, 8)
@@ -146,13 +146,13 @@ export default {
                 });
         },
         getType() {
-            axios.get(this.Globalstore.apiSever+"/fenlei").then((res) => {
+            axios.get(this.Globalstore.apiServer+"/fenlei").then((res) => {
                 this.type = res.data;
             });
         },
         getOther() {
             axios
-                .get(this.Globalstore.apiSever+"/products")
+                .get(this.Globalstore.apiServer+"/products")
                 .then((res) => {
                     this.others = res.data;
                     this.others.reverse()

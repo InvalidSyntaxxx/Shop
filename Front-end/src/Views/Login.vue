@@ -104,7 +104,7 @@ export default {
         },
         handleLogin() {
             axios.post(
-                this.Globalstore.apiSever + '/login',
+                this.Globalstore.apiServer + '/login',
                 {
                     nikename: this.user.username,
                     password: this.user.password
@@ -133,7 +133,7 @@ export default {
         handleRegister() {
             // this.showTips(this.user.username)
             axios.post(
-                this.Globalstore.apiSever + '/user',
+                this.Globalstore.apiServer + '/user',
                 {
                     nikename: this.user.username,
                     password: this.user.password,

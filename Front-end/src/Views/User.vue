@@ -4,7 +4,7 @@
  * @Author: 王远昭
  * @Date: 2023-01-15 12:22:30
  * @LastEditors: 王远昭
- * @LastEditTime: 2023-01-16 22:52:40
+ * @LastEditTime: 2023-02-03 17:36:22
 -->
 
 <template>
@@ -65,8 +65,15 @@
     </el-container>
 </template>
 <script>
+import { useGlobalStore } from '../store/global'
 // import Admin from './Admin.vue';
 export default {
+    setup(){
+        const GloabelStore = useGlobalStore()
+        return {
+            GloabelStore
+        }
+    },
     data() {
         return {
             user :{},
@@ -88,7 +95,7 @@ export default {
             });
         },
         getType() {
-            axios.get("http://localhost:53000/user").then((res) => {
+            axios.get(this.GloabelStore.apiServer + "/user").then((res) => {
                 this.user = res.data;
             });
         }

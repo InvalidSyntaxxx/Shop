@@ -4,7 +4,7 @@
  * @Author: 王远昭
  * @Date: 2023-01-16 09:59:11
  * @LastEditors: 王远昭
- * @LastEditTime: 2023-01-17 01:28:19
+ * @LastEditTime: 2023-02-03 18:23:56
 -->
 <!-- 个人用户详细信息 -->
 <template>
@@ -21,7 +21,7 @@
 
         <!-- 头像 -->
         <div class="avatar">
-            <el-avatar size="large" src="../images/avatar/2.jpg" />
+            <el-avatar size="large" src="/avatar/2.jpg" />
         </div>
 
         <!-- 信息表单 -->
@@ -62,10 +62,17 @@
 <script>
 import axios from 'axios';
 import { ElMessage } from 'element-plus';
+import { useGlobalStore } from '../../store/global';
 export default {
+    setup(){
+        const globalstore = useGlobalStore()
+        return {
+            globalstore
+        }
+    },
     data() {
         return {
-            rootImage: "../images/avatar/",
+            rootImage: "/avatar/",
             user: {},
             userSession: "1"
         }
@@ -79,13 +86,13 @@ export default {
             });
         },
         getUserInfo() {
-            axios.get("http://localhost:53000/user")
+            axios.get("/user")
                 .then((res) => {
                     this.user = res.data;
                 });
         },
         putUserInfo() {
-            axios.put("http://localhost:53000/user",
+            axios.put(this.globalstore.apiServer + "/user",
                 this.user,
                 {
                     headers: {

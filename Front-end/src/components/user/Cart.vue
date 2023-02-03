@@ -4,7 +4,7 @@
  * @Author: 王远昭
  * @Date: 2023-01-14 12:37:30
  * @LastEditors: 王远昭
- * @LastEditTime: 2023-01-19 10:23:48
+ * @LastEditTime: 2023-02-03 17:48:58
 -->
 <template>
   <el-breadcrumb>
@@ -57,11 +57,18 @@
 <script>
 import axios from 'axios';
 import { computed } from 'vue'
+import { useGlobalStore } from '../../store/global';
 import { ElMessage, ElMessageBox } from 'element-plus'
 export default {
+  setup(){
+    const Global = useGlobalStore()
+return {
+    Global
+}
+  },
   data() {
     return {
-      rootImage: "images/products/",
+      rootImage: "/products/",
       loading: true,
       container: {
         products: [],
@@ -113,7 +120,7 @@ export default {
     },
     getCart() {
       axios
-        .get("http://localhost:53000/cart")
+        .get(this.Global.apiServer + "/cart")
         .then((res) => {
           this.container.products = res.data;
           //   alert(JSON.stringify(this.container.products))
@@ -161,7 +168,7 @@ export default {
           // 后端数据删除
           axios({
             url:
-              "http://localhost:53000/cart?DeleteID=" +
+              this.Global.apiServer + "cart?DeleteID=" +
               this.container.tableData[index]["id"],
             method: "POST",
           })
@@ -182,7 +189,7 @@ export default {
     handleAdd(index) {
         axios({
           method: "post",
-          url: "http://localhost:53000/order",
+          url: this.Global.apiServer + "/order",
           data: this.container.tableData[index],
           headers: {
             'Content-Type': 'multipart/form-data',

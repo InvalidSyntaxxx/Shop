@@ -4,12 +4,10 @@
  * @Author: 王远昭
  * @Date: 2023-01-16 09:58:43
  * @LastEditors: 王远昭
- * @LastEditTime: 2023-01-19 08:38:59
+ * @LastEditTime: 2023-02-03 18:30:34
 -->
 <!-- 订单页 -->
 <template>
-
-
     <!-- 头顶面包屑，我是歇了 -->
     <el-breadcrumb>
         <el-breadcrumb-item :to="{ path: '/User' }">我的</el-breadcrumb-item>
@@ -19,7 +17,7 @@
     <el-divider class="first"></el-divider>
     
     <h1>订单列表</h1>
-    <el-empty v-if="!orders" description="这里什么也没有" />
+    <el-empty v-if="!orders" description="亲，您在今年还没有收获哦！😐" />
     <div v-else class="container" v-for="order in orders">
         <el-divider v-if="order.id != 1" />
         <el-container class="orderCard">
@@ -112,18 +110,25 @@
     </div>
     
     <el-divider />
-    <div class="footer">
-        亲，您在今年都收获满满呢！😁
+    <div v-if="orders" class="footer">
+        亲，您在今年都收获满满！😁
     </div>
 </template>
 
 <script>
 import axios from 'axios';
 import { ElMessage } from 'element-plus'
+import { useGlobalStore } from '../../store/global';
 export default {
+    setup() {
+        const globalstore = useGlobalStore()
+        return {
+            globalstore
+        }
+    },
     data() {
         return {
-            rootImage: "images/products/",
+            rootImage: "/products/",
             orders: []
 
         }
@@ -139,7 +144,7 @@ export default {
         // 获取全部订单
         getOrders() {
             axios
-                .get("http://localhost:53000/order")
+                .get(this.globalstore.apiServer + "/order")
                 .then((res) => {
                     this.orders = res.data;
                     console.log(JSON.stringify(this.orders))
