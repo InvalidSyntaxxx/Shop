@@ -8,7 +8,7 @@ Shop是一款由前端渐进式技术框架 Vue3.2 和后端技术框架 Flask�
 
 👉[后端源码](./Back-end/)👈
 
-👉[商城1.0版本](https://shop.wangwangyz.site)👈
+~~👉[商城1.0版本](https://shop.wangwangyz.site)👈~~考研中，服务器过期了
 
 ## 感谢
 
